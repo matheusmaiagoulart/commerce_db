@@ -2,19 +2,21 @@ package matheusmaia.commerce.domain.Usuario;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @NoArgsConstructor
 @Getter
+@Setter
 @Table(name = "usuarios")
 @Entity(name = "Usuario")
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true)
     private Long id;
 
     private String login;
@@ -22,10 +24,8 @@ public class Usuario {
     private Boolean ativo;
 
 
-    public Usuario(CadastrarUsuarioDTO dados)
+    public Usuario(String login, String senha)
     {
-        this.login = dados.login();
-        this.senha = dados.senha();
         this.ativo = true;
     }
 

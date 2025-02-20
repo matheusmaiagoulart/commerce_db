@@ -11,7 +11,5 @@ public record CadastrarUsuarioDTO(
 
         @NotNull
         @Size(min = 4)
-        String senha,
-
-        Boolean ativo) {
+        String senha) {
 }
