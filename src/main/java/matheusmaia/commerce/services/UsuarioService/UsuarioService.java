@@ -39,16 +39,16 @@ public class UsuarioService {
 
         log.info("Chegou na Service");
         String senhaCriptografada = passwordEncoder.encode(dados.senha());
-        Usuario usuario1 = new Usuario(dados.login(), senhaCriptografada);
+        Usuario usuario1 = new Usuario(dados);
         userRepository.save(usuario1);
 
     return ResponseEntity.ok().build();
     }
 
     @Transactional
-    public ResponseEntity autenticarUsuario(String login, String senha){
+    public ResponseEntity autenticarUsuario(DadosAutenticacaoDTO dados){
         try {
-            var usernamePassword = new UsernamePasswordAuthenticationToken(login, senha);
+            var usernamePassword = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
             var auth = this.authenticationManager.authenticate(usernamePassword);
         } catch (BadCredentialsException e){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");

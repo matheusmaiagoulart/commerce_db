@@ -36,7 +36,7 @@ public class UsuarioController {
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid DadosAutenticacaoDTO dados){
-        this.usuarioService.autenticarUsuario(dados.login(), dados.senha());
+        this.usuarioService.autenticarUsuario(dados);
         return ResponseEntity.ok().build();
     }
 

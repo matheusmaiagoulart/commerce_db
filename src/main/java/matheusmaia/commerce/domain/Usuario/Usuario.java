@@ -24,8 +24,10 @@ public class Usuario {
     private Boolean ativo;
 
 
-    public Usuario(String login, String senha)
+    public Usuario(CadastrarUsuarioDTO dados)
     {
+        this.login = dados.login();
+        this.senha = dados.senha();
         this.ativo = true;
     }
 
