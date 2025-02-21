@@ -27,7 +27,7 @@ public class UsuarioController {
 
 
     @PostMapping("/cadastrarUsuario")
-    public ResponseEntity<Void> cadastrarUsuario(@Valid @RequestBody CadastrarUsuarioDTO dados){
+    public ResponseEntity cadastrarUsuario(@Valid @RequestBody CadastrarUsuarioDTO dados){
         log.info("chegou na controller");
         usuarioService.cadastrarUsuario(dados);
         return ResponseEntity.ok().build();

@@ -50,11 +50,13 @@ public class UsuarioService {
         try {
             var usernamePassword = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
             var auth = this.authenticationManager.authenticate(usernamePassword);
-        } catch (BadCredentialsException e){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
-        } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro durante a autenticação");
         }
+        catch (BadCredentialsException e){
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
+    }
+//          catch (Exception e){
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro durante a autenticação");
+//        }
 
         return ResponseEntity.ok().build();
     }
