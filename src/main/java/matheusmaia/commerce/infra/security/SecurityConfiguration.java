@@ -3,6 +3,7 @@ package matheusmaia.commerce.infra.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -25,6 +26,9 @@ public class SecurityConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(SecurityConfiguration.class);
 
+    @Autowired
+    private SecurityFilter securityFilter;
+
     @Bean //Não esquecer de colocar o @Bean, pois se não o spring não executa a classe
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -34,6 +38,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST,"/user/cadastrarUsuario").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
                         .anyRequest().authenticated())
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
