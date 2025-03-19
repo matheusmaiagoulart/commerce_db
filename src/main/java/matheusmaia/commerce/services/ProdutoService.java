@@ -18,12 +18,18 @@ public class ProdutoService {
 
     @Transactional
     public ResponseEntity<Produto> criarProduto(CadastrarProdutoDTO dados){
+<<<<<<< HEAD
 
+=======
+>>>>>>> 09d0684ad67c110ab8ab5b018a1d071a3a024775
         var Produto = new Produto(dados);
         System.out.println(Produto.toString());
         this.produtoRepository.save(Produto);
         return ResponseEntity.ok(Produto);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 09d0684ad67c110ab8ab5b018a1d071a3a024775
     }
 }
