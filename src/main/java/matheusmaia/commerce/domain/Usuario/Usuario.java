@@ -37,6 +37,7 @@ public class Usuario implements UserDetails {
         this.ativo = true;
     }
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
@@ -70,5 +71,13 @@ public class Usuario implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 }
