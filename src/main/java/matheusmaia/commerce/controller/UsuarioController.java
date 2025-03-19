@@ -28,14 +28,15 @@ public class UsuarioController {
 
 
         @PostMapping("/cadastrarUsuario")
-        public ResponseEntity cadastrarUsuario(@Valid @RequestBody CadastrarUsuarioDTO dados){
-            usuarioService.cadastrarUsuario(dados);
-            return ResponseEntity.ok().build();
+        public ResponseEntity cadastrarUsuario(@Valid @RequestBody CadastrarUsuarioDTO dados)
+        {
+            return usuarioService.cadastrarUsuario(dados);
         }
 
 
         @PostMapping("/login")
-        public ResponseEntity login(@RequestBody @Valid DadosAutenticacaoDTO dados){
+        public ResponseEntity login(@RequestBody @Valid DadosAutenticacaoDTO dados)
+        {
             var auth = this.usuarioService.autenticarUsuario(dados);
             return ResponseEntity.ok(auth.getBody());
         }

@@ -1,6 +1,6 @@
 CREATE TABLE produtos (
-    id BIGINT NOT NULL AUTO_INCREMENT,
-    nomeProduto VARCHAR(100) NOT NULL,
+    id VARCHAR(36) NOT NULL,
+    nome_produto VARCHAR(100) NOT NULL,
     validade DATE NOT NULL,
     preco DECIMAL(10,2) NOT NULL,
     PRIMARY KEY (id)
