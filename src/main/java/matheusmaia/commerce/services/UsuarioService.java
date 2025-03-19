@@ -55,6 +55,7 @@ public class UsuarioService {
         }
 
         Usuario userAlreadyExists = userRepository.exitsByLogin(dados.login()); //Verifica existencia do usuario no banco
+
         if(userAlreadyExists != null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário já cadastrado no sistema! Use outro nome de Login!");
         }
