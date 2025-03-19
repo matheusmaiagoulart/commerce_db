@@ -4,7 +4,6 @@ package matheusmaia.commerce.services;
 import matheusmaia.commerce.domain.Usuario.CadastrarUsuarioDTO;
 import matheusmaia.commerce.domain.Usuario.DadosAutenticacaoDTO;
 import matheusmaia.commerce.domain.Usuario.Usuario;
-import matheusmaia.commerce.infra.Exceptions.ValidacaoException;
 import matheusmaia.commerce.infra.security.TokenDadosJWT;
 import matheusmaia.commerce.infra.security.TokenService;
 import matheusmaia.commerce.repositories.UserRepository;
@@ -12,7 +11,6 @@ import matheusmaia.commerce.utils.TratamentoDeDados;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,18 +27,15 @@ public class UsuarioService {
 
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
     private TokenService tokenService;
-
     @Autowired
     private TratamentoDeDados tratamentoDeDados;
+
 
     //Cadastrar Usuário
     @Transactional
@@ -60,7 +55,6 @@ public class UsuarioService {
         }
 
         Usuario userAlreadyExists = userRepository.exitsByLogin(dados.login()); //Verifica existencia do usuario no banco
-
         if(userAlreadyExists != null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário já cadastrado no sistema! Use outro nome de Login!");
         }
