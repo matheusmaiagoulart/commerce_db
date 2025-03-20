@@ -12,7 +12,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleValidacaoException(ValidacaoException ex) {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body(ex.getMessage());
+                .body(ex.getMessage() + "Faltam informações! Campos vazios ou Nulos não são aceitos!");
 
     }
 }

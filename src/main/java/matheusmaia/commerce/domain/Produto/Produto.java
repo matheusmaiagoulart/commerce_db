@@ -1,15 +1,14 @@
 package matheusmaia.commerce.domain.Produto;
 
-
+import lombok.Setter;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
-
+@Setter
 @NoArgsConstructor
 @Getter
 @Table(name = "produtos")
@@ -18,10 +17,14 @@ public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @Column(name = "id")
+    private UUID id;
 
+    @Column(name = "nome_produto")
     private String nomeProduto;
+    @Column(name = "validade")
     private LocalDate validade;
+    @Column(name = "preco")
     private BigDecimal preco;
 
     public Produto(CadastrarProdutoDTO dados){
@@ -29,4 +32,5 @@ public class Produto {
         this.validade = dados.validade();
         this.preco = dados.preco();
     }
+    
 }

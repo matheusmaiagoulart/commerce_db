@@ -20,7 +20,6 @@ public class ProdutoController {
 
     @PostMapping("/criarProduto")
     public ResponseEntity criarProduto(@Valid @RequestBody CadastrarProdutoDTO dados){
-         var Produto = produtoService.criarProduto(dados);
-        return ResponseEntity.ok().body(Produto);
+        return produtoService.criarProduto(dados);
     }
 }

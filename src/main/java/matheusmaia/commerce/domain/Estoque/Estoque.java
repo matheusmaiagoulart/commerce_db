@@ -1,6 +1,7 @@
 package matheusmaia.commerce.domain.Estoque;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 public class Estoque {
 
     @Id
+    @Column(name = "id_produto")
     private String idProduto;
 
     private int quantidade;
