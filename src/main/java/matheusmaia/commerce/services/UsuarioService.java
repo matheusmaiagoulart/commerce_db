@@ -65,7 +65,6 @@ public class UsuarioService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário já cadastrado no sistema! Use outro nome de Login!");
         }
 
-
         String senhaCriptografada = passwordEncoder.encode(senha); //Criptografia da Senha
 
         //Salvando usuario ja validado e tratado
