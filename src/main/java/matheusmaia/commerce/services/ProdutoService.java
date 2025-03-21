@@ -3,7 +3,6 @@ package matheusmaia.commerce.services;
 import matheusmaia.commerce.domain.Produto.CadastrarProdutoDTO;
 import matheusmaia.commerce.domain.Produto.Produto;
 import matheusmaia.commerce.repositories.ProdutoRepository;
-import matheusmaia.commerce.repositories.ProdutoRepository;
 import matheusmaia.commerce.utils.TratamentoDeDados;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,14 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.UUID;
 
 @Service
 public class ProdutoService {
 
     @Autowired
     private ProdutoRepository produtoRepository;
-
     @Autowired
     private TratamentoDeDados tratamentoDeDados;
 
