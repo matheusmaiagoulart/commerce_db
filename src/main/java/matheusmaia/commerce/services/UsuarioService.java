@@ -27,12 +27,16 @@ public class UsuarioService {
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Autowired
     private AuthenticationManager authenticationManager;
+
     @Autowired
     private TokenService tokenService;
+
     @Autowired
     private TratamentoDeDados tratamentoDeDados;
 
