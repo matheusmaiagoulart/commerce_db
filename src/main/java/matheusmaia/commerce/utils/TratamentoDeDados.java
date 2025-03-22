@@ -4,8 +4,6 @@ package matheusmaia.commerce.utils;
 import matheusmaia.commerce.infra.Exceptions.ValidacaoException;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 @Component
 public class TratamentoDeDados {
     //Classe para trataemento de dados de entrada
