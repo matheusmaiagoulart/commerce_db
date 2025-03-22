@@ -1,9 +1,0 @@
-CREATE TABLE estoque {
-
-    id VARCHAR(36) PRIMARY KEY,
-    id_produto VARCHAR(36) NOT NULL,
-    quantidade INT NOT NULL,
-    nome_produto VARCHAR(155) NOT NULL,
-    FOREIGN KEY (id_produto) REFERENCES produtos(id)
-
-}

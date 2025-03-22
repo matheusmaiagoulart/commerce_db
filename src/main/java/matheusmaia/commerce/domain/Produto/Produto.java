@@ -4,6 +4,8 @@ import lombok.Setter;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import matheusmaia.commerce.domain.Estoque.Estoque;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -27,11 +29,12 @@ public class Produto {
     @Column(name = "preco")
     private BigDecimal preco;
 
+    @OneToOne(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Estoque estoque;
+
     public Produto(CadastrarProdutoDTO dados){
         this.nomeProduto = dados.nomeProduto();
         this.validade = dados.validade();
         this.preco = dados.preco();
     }
-
-
 }

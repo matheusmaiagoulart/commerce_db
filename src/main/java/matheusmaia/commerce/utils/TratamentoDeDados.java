@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TratamentoDeDados {
-    //Classe para trataemento de dados de entrada
+    //Classe para tratamento de dados de entrada
 
 
     public String tratamentoDado(String dado, String nomeDado) {

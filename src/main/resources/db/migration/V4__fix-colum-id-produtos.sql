@@ -1,1 +1,0 @@
-alter table produtos modify id BINARY(16) NOT NULL;
