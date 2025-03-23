@@ -2,6 +2,7 @@ package matheusmaia.commerce.controller;
 
 import jakarta.validation.Valid;
 import matheusmaia.commerce.domain.Estoque.CadastrarEstoqueDTO;
+import matheusmaia.commerce.domain.Estoque.DadosListagemEstoqueDTO;
 import matheusmaia.commerce.repositories.EstoqueRepository;
 import matheusmaia.commerce.services.EstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,13 @@ public class EstoqueController {
     @PostMapping("/criarEstoque/{id}")
     public ResponseEntity criarEstoque(@PathVariable UUID id, @Valid @RequestBody CadastrarEstoqueDTO DTO){
         return estoqueService.criarEstoque(DTO, id);
+    }
+
+
+    @GetMapping("/listarEstoque")
+    public ResponseEntity listarEstoque(DadosListagemEstoqueDTO dto){
+        System.out.println("chegou na controller");
+        return estoqueService.listarEstoque(dto);
     }
 }
 
