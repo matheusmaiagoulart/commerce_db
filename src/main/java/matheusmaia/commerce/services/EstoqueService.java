@@ -23,25 +23,27 @@ public class EstoqueService {
     private EstoqueRepository estoqueRepository;
 
     public ResponseEntity criarEstoque(CadastrarEstoqueDTO DTO, UUID id){
-        Produto produto = produtoRepository.findById(id);
-        if(produto == null){
-            throw new ProdutoNaoEncontradoException("O produto não foi encontrado na base de Produtos! Verifique o ID e tente novamente!");
-        }
+        Produto produto = produtoRepository.findById(id).orElseThrow(() -> new ProdutoNaoEncontradoException("O produto não foi encontrado na base de Produtos! Verifique o ID e tente novamente!"));
+
         Estoque estoque = new Estoque(DTO, produto);
         estoqueRepository.save(estoque);
         return ResponseEntity.ok().body(estoque);
     }
 
 
-    public ResponseEntity listarEstoque(DadosListagemEstoqueDTO listagemEstoqueDTO){
-        System.out.println(
-                "chegou na service"
-        );
+    public ResponseEntity listarTodoEstoque(DadosListagemEstoqueDTO listagemEstoqueDTO){
        var listaEstoque = estoqueRepository.findAll().stream().map(DadosListagemEstoqueDTO::new).toList();
-        System.out.println(listagemEstoqueDTO.id_produto());
-        System.out.println(listagemEstoqueDTO.quantidade());
-        System.out.println(listagemEstoqueDTO.validade());
-        System.out.println(listagemEstoqueDTO.nome_produto());
+        if (listaEstoque == null || listaEstoque.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("A requisição foi bem sucedida! Porém, não há registros para mostrar!");
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(listaEstoque);
+        }
+
+    }
+
+    public ResponseEntity listarEstoqueAtivo(DadosListagemEstoqueDTO listagemEstoqueDTO){
+
+        var listaEstoque = estoqueRepository.findAllByAtivoTrue().stream().map(DadosListagemEstoqueDTO::new).toList();
         if (listaEstoque == null || listaEstoque.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("A requisição foi bem sucedida! Porém, não há registros para mostrar!");
         } else {

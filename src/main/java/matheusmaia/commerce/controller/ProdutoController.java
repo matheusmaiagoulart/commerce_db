@@ -18,19 +18,42 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
-    @GetMapping("/listarProdutos")
-    public ResponseEntity listarProdutos(DadosListagemProdutosDTO dto){
-        return produtoService.listarProdutos(dto);
+
+    @GetMapping("/listarProdutosAtivos")
+    public ResponseEntity listarProdutos(DadosListagemProdutosDTO dto){ //Lista somente produtos ativos
+        return produtoService.listarProdutosAtivos(dto);
+    }
+
+
+    @GetMapping("/listarTodosProdutos")
+    public ResponseEntity listarTodosProdutos(DadosListagemProdutosDTO dto){ //Lista todos os produtos já cadastrados
+
+        return produtoService.listarTodosProdutos(dto);
+
     }
 
     @PostMapping("/criarProduto")
     public ResponseEntity criarProduto(@Valid @RequestBody CadastrarProdutoDTO dados){
+
          var Produto = produtoService.criarProduto(dados);
         return ResponseEntity.ok().body(Produto);
+
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity alterarProduto(@PathVariable UUID id, @Valid @RequestBody editarProdutoDTO dto){
-        return produtoService.editarProduto(id, dto);
+    public ResponseEntity atualizarProduto(@PathVariable UUID id, @Valid @RequestBody editarProdutoDTO dto){
+
+        return produtoService.atualizarProduto(id, dto);
+
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity getProdutoById(@PathVariable UUID id){
+
+        return produtoService.getProdutoById(id);
+
+    }
+
+
+
 }

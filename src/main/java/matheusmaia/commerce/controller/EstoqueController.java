@@ -23,12 +23,21 @@ public class EstoqueController {
         return estoqueService.criarEstoque(DTO, id);
     }
 
-
-    @GetMapping("/listarEstoque")
-    public ResponseEntity listarEstoque(DadosListagemEstoqueDTO dto){
+    //Lista ativos e inativos
+    @GetMapping("/listarTodoEstoque")
+    public ResponseEntity listarTodoEstoque(DadosListagemEstoqueDTO dto){
         System.out.println("chegou na controller");
-        return estoqueService.listarEstoque(dto);
+        return estoqueService.listarTodoEstoque(dto);
     }
+
+    //Lista estoque ativo
+    @GetMapping("/listarEstoqueAtivo")
+    public ResponseEntity listarEstoqueAtivo(DadosListagemEstoqueDTO dto){
+        System.out.println("chegou na controller");
+        return estoqueService.listarEstoqueAtivo(dto);
+    }
+
+
 }
 
 

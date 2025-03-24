@@ -46,8 +46,8 @@ public class ProdutoService {
     }
 
 
-    public ResponseEntity listarProdutos(DadosListagemProdutosDTO dto) {
-        var allProducts = produtoRepository.findAll().stream().map(DadosListagemProdutosDTO::new).toList();
+    public ResponseEntity listarProdutosAtivos(DadosListagemProdutosDTO dto) {
+        var allProducts = produtoRepository.findAllByAtivoTrue().stream().map(DadosListagemProdutosDTO::new).toList();
         if (allProducts == null || allProducts.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("A requisição foi bem sucedida! Porém, não há registros para mostrar!");
         } else {
@@ -56,28 +56,54 @@ public class ProdutoService {
     }
 
     @Transactional
-    public ResponseEntity editarProduto(UUID id, editarProdutoDTO editarProduto) {
-        Produto produto = produtoRepository.findById(id);
+    public ResponseEntity atualizarProduto(UUID id, editarProdutoDTO editarProduto) {
 
-        if (produto == null) {
-            throw new ProdutoNaoEncontradoException("O produto não foi encontado!");
+        Produto produto = produtoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado!"));
+        Estoque estoque = estoqueRepository.findById(id).orElseThrow(() -> new ProdutoNaoEncontradoException("Produto não encontrado!"));
+
+
+        //Nome produto
+        if (editarProduto.nome_produto() != null) {
+            produto.setNomeProduto(editarProduto.nome_produto());
+            estoque.setNomeProduto(editarProduto.nome_produto());
         }
-        produto.setNomeProduto(editarProduto.nome_produto());
-        produto.setPreco(editarProduto.preco());
-        produto.setValidade(editarProduto.validade());
+        //Validade
+        if (editarProduto.validade() != null) {
+            produto.setValidade(editarProduto.validade());
+            estoque.setValidade(editarProduto.validade());
+        }
+        //Preco
+        if (editarProduto.preco() != null) {
+            produto.setPreco(editarProduto.preco());
+            estoque.setPreco(editarProduto.preco());
+        }
+        //Ativo
+        if (editarProduto.ativo() != null) {
+            produto.setAtivo(editarProduto.ativo());
+            estoque.setAtivo(editarProduto.ativo());
+        }
+
         produtoRepository.save(produto);
-        var Produto = produtoRepository.findById(id);
+        estoqueRepository.save(estoque);
 
-        //Atualizando a tabela estoque com os novos dados do Produto, que foram alterados
-        Optional<Estoque> estoque = estoqueRepository.findById(Produto.getId());
-        if(estoque.isEmpty()){
-            throw new ProdutoNaoEncontradoException("Estoque não encontrado");
-        }
-        Estoque estoque1 = estoque.get();
-        estoque1.setNomeProduto(Produto.getNomeProduto());
-        estoque1.setValidade(Produto.getValidade());
-        estoqueRepository.save(estoque1);
-
-        return ResponseEntity.status(HttpStatus.OK).body("Produto e Estoque atualizados com sucesso!" + Produto);
+        return ResponseEntity.status(HttpStatus.OK).body("Produto e Estoque atualizados com sucesso!");
     }
+
+    public ResponseEntity listarTodosProdutos(DadosListagemProdutosDTO dto) {
+        var allProducts = produtoRepository.findAll().stream().map(DadosListagemProdutosDTO::new).toList();
+        if (allProducts == null || allProducts.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("A requisição foi bem sucedida! Porém, não há registros para mostrar!");
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(allProducts);
+        }
+    }
+
+
+    public ResponseEntity getProdutoById(UUID id){
+        Produto produto = produtoRepository.findById(id).orElseThrow(() -> new ProdutoNaoEncontradoException("O produto não foi encontrado!"));
+        return ResponseEntity.status(HttpStatus.OK).body(produto);
+    }
+
+
 }

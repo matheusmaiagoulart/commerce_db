@@ -4,7 +4,13 @@ import matheusmaia.commerce.domain.Produto.Produto;
 import org.hibernate.validator.constraints.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ProdutoRepository extends JpaRepository<Produto, UUID> {
+import java.util.Collection;
+import java.util.Optional;
 
-    Produto findById(java.util.UUID id);
+public interface ProdutoRepository extends JpaRepository<Produto, UUID> {
+    
+
+    Collection<Produto> findAllByAtivoTrue();
+
+    Optional<Produto> findById(java.util.UUID id);
 }
