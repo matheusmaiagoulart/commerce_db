@@ -26,11 +26,14 @@ public class Produto {
 
     @Column(name = "nome_produto")
     private String nomeProduto;
+
     @Column(name = "validade")
     private LocalDate validade;
+
     @Column(name = "preco")
     private BigDecimal preco;
 
+    @Column(name = "ativo")
     private Boolean ativo;
 
     @JsonManagedReference
