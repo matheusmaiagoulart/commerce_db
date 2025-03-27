@@ -22,20 +22,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UsuarioService {
-    private static final Logger log = LoggerFactory.getLogger(UsuarioService.class);
+
 
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
     private TokenService tokenService;
-
     @Autowired
     private TratamentoDeDados tratamentoDeDados;
 
@@ -49,6 +45,7 @@ public class UsuarioService {
         String login = tratamentoDeDados.tratamentoDado(dados.login(), "Login");
         String senha = tratamentoDeDados.tratamentoDado(dados.senha(), "Senha");
 
+        //Validação dos dados de entrada
         if(login.length() <= TAMANHO_MINIMO_LOGIN){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Seu campo Login precisa ter pelo menos " + TAMANHO_MINIMO_LOGIN + " caracteres");
         }
@@ -56,13 +53,15 @@ public class UsuarioService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Seu campo Senha precisa ter pelo menos " + TAMANHO_MINIMO_SENHA + " caracteres");
         }
 
-        Usuario userAlreadyExists = userRepository.exitsByLogin(dados.login()); //Verifica existencia do usuario no banco
+        //Verifica existencia do usuario no banco
+        Usuario userAlreadyExists = userRepository.exitsByLogin(dados.login());
 
         if(userAlreadyExists != null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário já cadastrado no sistema! Use outro nome de Login!");
         }
 
-        String senhaCriptografada = passwordEncoder.encode(senha); //Criptografia da Senha
+        //Criptografia da Senha
+        String senhaCriptografada = passwordEncoder.encode(senha);
 
         //Salvando usuario ja validado e tratado
         var usuario = new Usuario(dados);
@@ -74,7 +73,7 @@ public class UsuarioService {
         return ResponseEntity.status(HttpStatus.CREATED).body("O usuário foi criado com sucesso!");
     }
 
-
+    @Transactional(readOnly = true)
     public ResponseEntity autenticarUsuario(DadosAutenticacaoDTO dados){
 
         try {

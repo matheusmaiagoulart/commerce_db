@@ -12,10 +12,10 @@ public class ValidacaoUsuario implements ValidadorTransacao{
     private UserRepository userRepository;
     @Override
     public void validar(TransacaoDTO dados) {
-        System.out.println("Validando usuário");
+
+        //Validacao Existencia do Usuario
         var usuario = userRepository.findById(dados.idUsuario())
                 .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado na base de dados! Transação não pode ser realizada!"));
 
-    System.out.println("Usuário validado");
     }
 }

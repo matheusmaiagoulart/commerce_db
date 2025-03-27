@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import matheusmaia.commerce.domain.Produto.Produto;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -23,12 +22,16 @@ public class Estoque {
     @Column(name = "id_produto")
     private UUID idProduto;
 
+    @Column(name = "quantidade")
     private int quantidade;
+
     @Column(name = "nome_produto")
     private String nomeProduto;
 
+    @Column(name = "validade")
     private LocalDate validade;
 
+    @Column(name = "preco")
     private BigDecimal preco;
 
     @OneToOne
@@ -36,6 +39,7 @@ public class Estoque {
     @JoinColumn(name = "id_produto", nullable = false, unique = true)
     private Produto produto;
 
+    @Column(name = "ativo")
     private Boolean ativo;
 
     public Estoque(CadastrarEstoqueDTO dados, Produto produto){

@@ -12,7 +12,7 @@ public class ValidacaoProduto implements ValidadorTransacao{
     private ProdutoRepository produtoRepository;
     @Override
     public void validar(TransacaoDTO dados) {
-        System.out.println("Validando produto");
+        //Verifica a existencia do Produto no banco
         var produto = produtoRepository.findById(dados.idProduto())
                 .orElseThrow(() -> new ProdutoNaoEncontradoException("Produto não encontrado na base de dados! Transação não pode ser realizada!"));
 

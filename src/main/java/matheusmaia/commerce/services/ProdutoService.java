@@ -1,6 +1,6 @@
 package matheusmaia.commerce.services;
 
-import jakarta.transaction.TransactionScoped;
+
 import matheusmaia.commerce.domain.Estoque.Estoque;
 import matheusmaia.commerce.domain.Produto.CadastrarProdutoDTO;
 import matheusmaia.commerce.domain.Produto.DadosListagemProdutosDTO;
@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -34,6 +33,7 @@ public class ProdutoService {
     @Transactional
     public ResponseEntity criarProduto(CadastrarProdutoDTO dados) {
 
+        //Tira espacos do dado
         String produtoNome = dados.nomeProduto().trim();
 
         if (dados.validade().isBefore(LocalDate.now())) {
@@ -42,9 +42,9 @@ public class ProdutoService {
         if (dados.preco() == null || (dados.preco().compareTo(BigDecimal.ZERO) < 0)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O preço precisa ser maior que 0!");
         }
-
+        //Salvo o produto com as informações tratadas
         var produto = new Produto(dados);
-        produto.setNomeProduto(produtoNome); //setando nome tratado
+        produto.setNomeProduto(produtoNome);
         produtoRepository.save(produto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(produto);
@@ -65,15 +65,17 @@ public class ProdutoService {
         }
     }
 
+
     @Transactional
     public ResponseEntity atualizarProduto(UUID id, editarProdutoDTO editarProduto) {
-
+        //Buscando produto no banco
         Produto produto = produtoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado!"));
-
+        //Buscando Estoque no banco
         Estoque estoque = estoqueRepository.findById(id)
                 .orElseThrow(() -> new ProdutoNaoEncontradoException("Estoque do Produto não encontrado!"));
 
+        //Atualizacoes na tabela Produtos e Estoque
 
         //Nome produto
         if (editarProduto.nome_produto() != null) {
@@ -106,12 +108,13 @@ public class ProdutoService {
     @Transactional(readOnly = true)
     public ResponseEntity listarTodosProdutos(DadosListagemProdutosDTO dto) {
 
-        var allProducts = produtoRepository.findAll().stream().map(DadosListagemProdutosDTO::new).toList();
-
+        var allProducts = produtoRepository.findAll()
+                .stream()
+                .map(DadosListagemProdutosDTO::new).
+                toList();
         if (allProducts.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("A requisição foi bem sucedida! Porém, não há registros para mostrar!");
         }
-
             return ResponseEntity.status(HttpStatus.OK).body(allProducts);
 
     }

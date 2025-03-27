@@ -21,13 +21,16 @@ public class Transacao {
     @Column(name = "id_produto")
     private UUID idProduto;
 
+    @Column(name = "quantidade")
     private Integer quantidade;
 
+    @Column(name = "valor")
     private BigDecimal valor;
 
     @Column(name = "data_hora")
     private OffsetDateTime dataHora;
 
+    @Column(name = "id_usuario")
     private Long idUsuario;
 
 

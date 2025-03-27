@@ -1,8 +1,6 @@
 package matheusmaia.commerce.domain.Estoque;
 
-import matheusmaia.commerce.domain.Produto.DadosListagemProdutosDTO;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 

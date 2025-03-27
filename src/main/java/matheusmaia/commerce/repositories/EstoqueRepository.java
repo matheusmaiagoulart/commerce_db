@@ -13,7 +13,9 @@ public interface EstoqueRepository extends JpaRepository<Estoque, UUID>{
     Optional<Estoque> findById(UUID id);
 
     @Query("""
-            select e from Estoque e where e.id = :id
+            SELECT
+             e 
+             FROM Estoque e where e.id = :id
             """)
     Estoque findEstoqueById(UUID id);
 

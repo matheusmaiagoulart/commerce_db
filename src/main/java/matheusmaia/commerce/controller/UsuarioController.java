@@ -26,14 +26,14 @@ public class UsuarioController {
         @Autowired
         private AuthenticationManager authenticationManager;
 
-
+        //Cadastrar Usuario
         @PostMapping("/cadastrarUsuario")
         public ResponseEntity cadastrarUsuario(@Valid @RequestBody CadastrarUsuarioDTO dados)
         {
             return usuarioService.cadastrarUsuario(dados);
         }
 
-
+        //Login
         @PostMapping("/login")
         public ResponseEntity login(@RequestBody @Valid DadosAutenticacaoDTO dados)
         {

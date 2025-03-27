@@ -6,8 +6,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import matheusmaia.commerce.domain.Estoque.Estoque;
-import matheusmaia.commerce.infra.Exceptions.Produto.ProdutoNaoEncontradoException;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;

@@ -15,6 +15,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/estoque")
 public class EstoqueController {
+
     @Autowired
     private EstoqueService estoqueService;
 
