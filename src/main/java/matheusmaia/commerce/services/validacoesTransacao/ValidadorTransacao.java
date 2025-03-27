@@ -1,6 +1,6 @@
 package matheusmaia.commerce.services.validacoesTransacao;
 
-import matheusmaia.commerce.domain.Venda.TransacaoDTO;
+import matheusmaia.commerce.domain.Transacao.TransacaoDTO;
 
 public interface ValidadorTransacao {
 

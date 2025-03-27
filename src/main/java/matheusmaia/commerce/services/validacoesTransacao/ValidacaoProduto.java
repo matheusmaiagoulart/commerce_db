@@ -1,6 +1,6 @@
 package matheusmaia.commerce.services.validacoesTransacao;
 
-import matheusmaia.commerce.domain.Venda.TransacaoDTO;
+import matheusmaia.commerce.domain.Transacao.TransacaoDTO;
 import matheusmaia.commerce.infra.Exceptions.Produto.ProdutoNaoEncontradoException;
 import matheusmaia.commerce.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

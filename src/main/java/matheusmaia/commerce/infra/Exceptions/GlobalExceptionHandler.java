@@ -2,6 +2,7 @@ package matheusmaia.commerce.infra.Exceptions;
 
 import matheusmaia.commerce.infra.Exceptions.Estoque.QuantidadeInsuficienteException;
 import matheusmaia.commerce.infra.Exceptions.Produto.ProdutoNaoEncontradoException;
+import matheusmaia.commerce.infra.Exceptions.Transacao.TransacoesNaoEncontradasException;
 import matheusmaia.commerce.infra.Exceptions.Usuario.UsuarioNaoEncontradoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleValidacaoException(ValidacaoException ex) {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body(ex.getMessage() + "Faltam informações! Campos vazios ou Nulos não são aceitos!");
+                .body(ex.getMessage());
 
     }
 
@@ -37,6 +38,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(QuantidadeInsuficienteException.class)
     public ResponseEntity<String> handleQuantidadeInsufieciente(QuantidadeInsuficienteException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+
+    }
+
+    @ExceptionHandler(TransacoesNaoEncontradasException.class)
+    public ResponseEntity<String> handleTransacoesNaoEncontradas(TransacoesNaoEncontradasException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
 
     }

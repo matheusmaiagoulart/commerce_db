@@ -1,4 +1,4 @@
-package matheusmaia.commerce.domain.Venda;
+package matheusmaia.commerce.domain.Transacao;
 
 
 import jakarta.persistence.*;
@@ -25,6 +25,7 @@ public class Transacao {
 
     private BigDecimal valor;
 
+    @Column(name = "data_hora")
     private OffsetDateTime dataHora;
 
     private Long idUsuario;
