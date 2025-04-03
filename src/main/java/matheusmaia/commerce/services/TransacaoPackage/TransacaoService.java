@@ -1,4 +1,4 @@
-package matheusmaia.commerce.services;
+package matheusmaia.commerce.services.TransacaoPackage;
 
 import matheusmaia.commerce.domain.Transacao.Transacao;
 import matheusmaia.commerce.domain.Transacao.TransacaoDTO;
@@ -6,7 +6,7 @@ import matheusmaia.commerce.infra.Exceptions.Transacao.TransacoesNaoEncontradasE
 import matheusmaia.commerce.repositories.EstoqueRepository;
 import matheusmaia.commerce.repositories.ProdutoRepository;
 import matheusmaia.commerce.repositories.TransacaoRepository;
-import matheusmaia.commerce.services.validacoesTransacao.ValidadorTransacao;
+import matheusmaia.commerce.services.TransacaoPackage.validacoesTransacao.ValidadorTransacao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

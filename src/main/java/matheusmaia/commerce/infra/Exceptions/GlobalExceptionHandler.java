@@ -3,7 +3,7 @@ package matheusmaia.commerce.infra.Exceptions;
 import matheusmaia.commerce.infra.Exceptions.Estoque.QuantidadeInsuficienteException;
 import matheusmaia.commerce.infra.Exceptions.Produto.ProdutoNaoEncontradoException;
 import matheusmaia.commerce.infra.Exceptions.Transacao.TransacoesNaoEncontradasException;
-import matheusmaia.commerce.infra.Exceptions.Usuario.UsuarioNaoEncontradoException;
+import matheusmaia.commerce.infra.Exceptions.Usuario.UsuarioException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -30,9 +30,9 @@ public class GlobalExceptionHandler {
 
     }
 
-    @ExceptionHandler(UsuarioNaoEncontradoException.class)
-    public ResponseEntity<String> handleUsuarioNaoEncontrado(UsuarioNaoEncontradoException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    @ExceptionHandler(UsuarioException.class)
+    public ResponseEntity<String> handleUsuarioNaoEncontrado(UsuarioException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
 
     }
 

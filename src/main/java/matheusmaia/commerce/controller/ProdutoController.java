@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import matheusmaia.commerce.domain.Produto.CadastrarProdutoDTO;
 import matheusmaia.commerce.domain.Produto.DadosListagemProdutosDTO;
 import matheusmaia.commerce.domain.Produto.editarProdutoDTO;
-import matheusmaia.commerce.services.ProdutoService;
+import matheusmaia.commerce.services.ProdutoPackage.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

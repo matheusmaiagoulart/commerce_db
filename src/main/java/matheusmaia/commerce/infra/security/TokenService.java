@@ -47,7 +47,7 @@ public class TokenService {
     }
 
 private Instant dataExpiracao() {
-    return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));//2 horas para expierar e colocando o -3 hrs de acordo com o fuso horario do brasil
+    return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));//2 horas para expirar e colocando o -3 hrs de acordo com o fuso horario do brasil
 }
 
 }

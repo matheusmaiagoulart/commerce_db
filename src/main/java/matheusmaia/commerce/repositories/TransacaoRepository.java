@@ -16,3 +16,4 @@ public interface TransacaoRepository extends JpaRepository<Transacao, Long> {
             """)
     List<Transacao> findByHora(OffsetDateTime dataHoraIntervalo);
 }
+
