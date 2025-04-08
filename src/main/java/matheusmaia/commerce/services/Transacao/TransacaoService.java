@@ -34,13 +34,13 @@ public class TransacaoService {
     @Transactional
     public ResponseEntity transacao(TransacaoDTO dados){
 
-        //validacao das classes que implementaram a interface ValidadorTransacao
+
         validadores.forEach(validadorTransacao -> validadorTransacao.validar(dados));
 
-        //Pegando valor do produto
+
         var precoProduto = produtoRepository.findById(dados.idProduto()).get().getPreco();
 
-        //Transforma para o valor final
+
         var valor = BigDecimal.valueOf(dados.quantidade()).multiply(precoProduto);
 
         //Adicina os novos valores atualizados no obj
