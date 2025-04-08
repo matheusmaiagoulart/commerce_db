@@ -1,4 +1,4 @@
-package matheusmaia.commerce.services.ProdutoPackage;
+package matheusmaia.commerce.services.Produto;
 
 
 import matheusmaia.commerce.domain.Estoque.Estoque;

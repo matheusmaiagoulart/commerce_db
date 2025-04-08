@@ -3,7 +3,7 @@ package matheusmaia.commerce.controller;
 import jakarta.validation.Valid;
 import matheusmaia.commerce.domain.Estoque.CadastrarEstoqueDTO;
 import matheusmaia.commerce.domain.Estoque.DadosListagemEstoqueDTO;
-import matheusmaia.commerce.services.EstoquePackage.EstoqueService;
+import matheusmaia.commerce.services.Estoque.EstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

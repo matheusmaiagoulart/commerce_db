@@ -1,4 +1,4 @@
-package matheusmaia.commerce.services.TransacaoPackage.validacoesTransacao;
+package matheusmaia.commerce.services.Transacao.validacoesTransacao;
 
 import matheusmaia.commerce.domain.Transacao.TransacaoDTO;
 import matheusmaia.commerce.infra.Exceptions.Produto.ProdutoNaoEncontradoException;

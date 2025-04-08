@@ -1,4 +1,4 @@
-package matheusmaia.commerce.services.EstoquePackage;
+package matheusmaia.commerce.services.Estoque;
 
 import matheusmaia.commerce.domain.Estoque.CadastrarEstoqueDTO;
 import matheusmaia.commerce.domain.Estoque.DadosListagemEstoqueDTO;

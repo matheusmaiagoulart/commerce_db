@@ -1,7 +1,6 @@
-package matheusmaia.commerce.services.TransacaoPackage.validacoesTransacao;
+package matheusmaia.commerce.services.Transacao.validacoesTransacao;
 
 import matheusmaia.commerce.domain.Transacao.TransacaoDTO;
-import matheusmaia.commerce.infra.Exceptions.Usuario.UsuarioException;
 import matheusmaia.commerce.infra.Exceptions.Usuario.UsuarioException;
 import matheusmaia.commerce.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

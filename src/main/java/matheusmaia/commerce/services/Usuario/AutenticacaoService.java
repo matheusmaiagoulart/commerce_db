@@ -1,4 +1,4 @@
-package matheusmaia.commerce.services.UsuarioPackage;
+package matheusmaia.commerce.services.Usuario;
 
 import matheusmaia.commerce.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

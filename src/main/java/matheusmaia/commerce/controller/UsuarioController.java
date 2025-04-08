@@ -3,7 +3,7 @@ package matheusmaia.commerce.controller;
 import jakarta.validation.Valid;
 import matheusmaia.commerce.domain.Usuario.CadastrarUsuarioDTO;
 import matheusmaia.commerce.domain.Usuario.DadosAutenticacaoDTO;
-import matheusmaia.commerce.services.UsuarioPackage.UsuarioService;
+import matheusmaia.commerce.services.Usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

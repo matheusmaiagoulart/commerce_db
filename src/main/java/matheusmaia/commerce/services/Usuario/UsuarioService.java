@@ -1,4 +1,4 @@
-package matheusmaia.commerce.services.UsuarioPackage;
+package matheusmaia.commerce.services.Usuario;
 
 
 import matheusmaia.commerce.domain.Usuario.CadastrarUsuarioDTO;
@@ -7,9 +7,7 @@ import matheusmaia.commerce.domain.Usuario.Usuario;
 import matheusmaia.commerce.infra.security.TokenDadosJWT;
 import matheusmaia.commerce.infra.security.TokenService;
 import matheusmaia.commerce.repositories.UserRepository;
-import matheusmaia.commerce.services.TransacaoPackage.validacoesTransacao.ValidadorTransacao;
-import matheusmaia.commerce.services.UsuarioPackage.ValidaUsuario.ValidadorUsuario;
-import matheusmaia.commerce.utils.TratamentoDeDados;
+import matheusmaia.commerce.services.Usuario.ValidaUsuario.ValidadorUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

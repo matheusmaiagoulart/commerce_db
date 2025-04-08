@@ -1,4 +1,4 @@
-package matheusmaia.commerce.services.UsuarioPackage.ValidaUsuario;
+package matheusmaia.commerce.services.Usuario.ValidaUsuario;
 
 import matheusmaia.commerce.domain.Usuario.CadastrarUsuarioDTO;
 import matheusmaia.commerce.domain.Usuario.Usuario;
