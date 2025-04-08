@@ -5,7 +5,9 @@ import matheusmaia.commerce.infra.Exceptions.Usuario.UsuarioException;
 import matheusmaia.commerce.repositories.UserRepository;
 import matheusmaia.commerce.utils.TratamentoDeDados;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ValidaSenhaUsuario implements ValidadorUsuario {
 
     @Autowired
