@@ -34,8 +34,8 @@ public class UsuarioController {
         @PostMapping("/login")
         public ResponseEntity login(@RequestBody @Valid DadosAutenticacaoDTO dados)
         {
-            var auth = this.usuarioService.autenticarUsuario(dados);
-            return ResponseEntity.ok(auth.getBody());
+
+            return this.usuarioService.autenticarUsuario(dados);
         }
 }
 
