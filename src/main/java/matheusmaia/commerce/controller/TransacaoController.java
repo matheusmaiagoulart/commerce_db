@@ -20,14 +20,12 @@ public class TransacaoController {
     //Criacao da Transacao
     @PostMapping
     public ResponseEntity transacao(@Valid @RequestBody TransacaoDTO dto){
-        System.out.println("Chegou na controller");
         return transacaoService.transacao(dto);
     }
 
     //Busca por intervalo
     @GetMapping("/{horasBusca}")
     public List<Transacao> buscarTransacoes(@PathVariable Integer horasBusca){
-        System.out.println("Buscando Transações");
         return transacaoService.buscarTransacoes(horasBusca);
     }
 
