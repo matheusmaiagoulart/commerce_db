@@ -1,7 +1,7 @@
 package matheusmaia.commerce.infra.Exceptions;
 
 import matheusmaia.commerce.infra.Exceptions.Estoque.QuantidadeInsuficienteException;
-import matheusmaia.commerce.infra.Exceptions.Produto.ProdutoNaoEncontradoException;
+import matheusmaia.commerce.infra.Exceptions.Produto.ProdutoException;
 import matheusmaia.commerce.infra.Exceptions.Transacao.TransacoesNaoEncontradasException;
 import matheusmaia.commerce.infra.Exceptions.Usuario.UsuarioException;
 import org.springframework.http.HttpStatus;
@@ -24,8 +24,8 @@ public class GlobalExceptionHandler {
 
     }
 
-    @ExceptionHandler(ProdutoNaoEncontradoException.class)
-        public ResponseEntity<String> handleProdutoNaoEncontrado(ProdutoNaoEncontradoException ex) {
+    @ExceptionHandler(ProdutoException.class)
+        public ResponseEntity<String> handleProdutoNaoEncontrado(ProdutoException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
 
     }

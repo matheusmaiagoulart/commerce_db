@@ -4,7 +4,7 @@ import matheusmaia.commerce.domain.Estoque.CadastrarEstoqueDTO;
 import matheusmaia.commerce.domain.Estoque.DadosListagemEstoqueDTO;
 import matheusmaia.commerce.domain.Estoque.Estoque;
 import matheusmaia.commerce.domain.Produto.Produto;
-import matheusmaia.commerce.infra.Exceptions.Produto.ProdutoNaoEncontradoException;
+import matheusmaia.commerce.infra.Exceptions.Produto.ProdutoException;
 import matheusmaia.commerce.repositories.EstoqueRepository;
 import matheusmaia.commerce.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class EstoqueService {
     public ResponseEntity criarEstoque(CadastrarEstoqueDTO DTO, UUID id){
 
         Produto produto = produtoRepository.findById(id)
-                .orElseThrow(() -> new ProdutoNaoEncontradoException("O produto não foi encontrado na base de Produtos! Verifique o ID e tente novamente!"));
+                .orElseThrow(() -> new ProdutoException("O produto não foi encontrado na base de Produtos! Verifique o ID e tente novamente!"));
         Estoque estoque = new Estoque(DTO, produto);
         estoqueRepository.save(estoque);
         return ResponseEntity.ok().body(estoque);

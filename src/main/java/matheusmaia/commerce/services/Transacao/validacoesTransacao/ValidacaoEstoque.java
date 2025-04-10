@@ -2,7 +2,7 @@ package matheusmaia.commerce.services.Transacao.validacoesTransacao;
 
 import matheusmaia.commerce.domain.Transacao.TransacaoDTO;
 import matheusmaia.commerce.infra.Exceptions.Estoque.QuantidadeInsuficienteException;
-import matheusmaia.commerce.infra.Exceptions.Produto.ProdutoNaoEncontradoException;
+import matheusmaia.commerce.infra.Exceptions.Produto.ProdutoException;
 import matheusmaia.commerce.repositories.EstoqueRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ public class ValidacaoEstoque implements ValidadorTransacao
             .orElseThrow(() ->
             {
                 log.info("/Transacao - Estoque do produto não foi encontrado!");
-                return new ProdutoNaoEncontradoException("Produto não encontrado em estoque!");
+                return new ProdutoException("Produto não encontrado em estoque!");
             });
 
     if(estoque.getQuantidade() < dados.quantidade()){

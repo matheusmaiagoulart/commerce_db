@@ -6,10 +6,13 @@ import matheusmaia.commerce.domain.Produto.CadastrarProdutoDTO;
 import matheusmaia.commerce.domain.Produto.DadosListagemProdutosDTO;
 import matheusmaia.commerce.domain.Produto.Produto;
 import matheusmaia.commerce.domain.Produto.editarProdutoDTO;
-import matheusmaia.commerce.infra.Exceptions.Produto.ProdutoNaoEncontradoException;
+import matheusmaia.commerce.infra.Exceptions.Produto.ProdutoException;
 import matheusmaia.commerce.repositories.EstoqueRepository;
 import matheusmaia.commerce.repositories.ProdutoRepository;
+import matheusmaia.commerce.services.Produto.validacoesProduto.ValidadorProduto;
 import matheusmaia.commerce.utils.TratamentoDeDados;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,34 +21,36 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Service
 public class ProdutoService {
 
+    private static final Logger log = LoggerFactory.getLogger(ProdutoService.class);
     @Autowired
     private ProdutoRepository produtoRepository;
     @Autowired
     private TratamentoDeDados tratamentoDeDados;
     @Autowired
     private EstoqueRepository estoqueRepository;
-
+    @Autowired
+    List<ValidadorProduto> validador;
     @Transactional
     public ResponseEntity criarProduto(CadastrarProdutoDTO dados) {
 
+        log.info("/Produto - Iniciando validações para cadastrar Produto");
         //Tira espacos do dado
         String produtoNome = dados.nomeProduto().trim();
 
-        if (dados.validade().isBefore(LocalDate.now())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A data de validade precisa ser maior que a Data de hoje");
-        }
-        if (dados.preco() == null || (dados.preco().compareTo(BigDecimal.ZERO) < 0)) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O preço precisa ser maior que 0!");
-        }
+        validador.forEach(validador -> validador.validar(dados));
+
         //Salvo o produto com as informações tratadas
         var produto = new Produto(dados);
         produto.setNomeProduto(produtoNome);
         produtoRepository.save(produto);
+
+        log.info("/Produto - Produto criado com sucesso!");
 
         return ResponseEntity.status(HttpStatus.CREATED).body(produto);
     }
@@ -59,7 +64,7 @@ public class ProdutoService {
                 .toList();
 
         if (allProducts.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ProdutoNaoEncontradoException("Não há produtos ativos!"));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ProdutoException("Não há produtos ativos!"));
         } else {
             return ResponseEntity.status(HttpStatus.OK).body(allProducts);
         }
@@ -68,12 +73,13 @@ public class ProdutoService {
 
     @Transactional
     public ResponseEntity atualizarProduto(UUID id, editarProdutoDTO editarProduto) {
+
         //Buscando produto no banco
         Produto produto = produtoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado!"));
         //Buscando Estoque no banco
         Estoque estoque = estoqueRepository.findById(id)
-                .orElseThrow(() -> new ProdutoNaoEncontradoException("Estoque do Produto não encontrado!"));
+                .orElseThrow(() -> new ProdutoException("Estoque do Produto não encontrado!"));
 
         //Atualizacoes na tabela Produtos e Estoque
 
@@ -123,7 +129,7 @@ public class ProdutoService {
     public ResponseEntity getProdutoById(UUID id){
 
         Produto produto = produtoRepository.findById(id)
-                .orElseThrow(() -> new ProdutoNaoEncontradoException("O produto não foi encontrado!"));
+                .orElseThrow(() -> new ProdutoException("O produto não foi encontrado!"));
 
         return ResponseEntity.status(HttpStatus.OK).body(produto);
     }
