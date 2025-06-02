@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -67,18 +68,20 @@ public class UsuarioService {
         return ResponseEntity.status(HttpStatus.CREATED).body("O usuário foi criado com sucesso!");
     }
 
-    @Transactional(readOnly = true)
+
     public ResponseEntity autenticarUsuario(DadosAutenticacaoDTO dados){
 
         try {
             log.info("Iniciando a autenticação do usuário!");
             var usernamePassword = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
+            System.out.println(usernamePassword);
             var auth = authenticationManager.authenticate(usernamePassword);
+            System.out.println("passou do autenticationmanage");
             var tokenJWT = tokenService.gerarToken((Usuario) auth.getPrincipal());
             log.info("Usuário autenticado!");
             return ResponseEntity.ok(new TokenDadosJWT(tokenJWT));
         }
-        catch (BadCredentialsException e){
+        catch (AuthenticationException e){
             log.info("Usuário não está autorizado!");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
         }

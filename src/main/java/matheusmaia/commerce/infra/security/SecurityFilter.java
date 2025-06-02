@@ -25,6 +25,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException, IOException {
 
+
         var tokenJWT = recuperarToken(request); //pega o token do cabeçalho
 
         if (tokenJWT != null) { //se o cabecalho com o token vier preenchido, ele pega e faz a validacao

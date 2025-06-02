@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.List;
 
 
-@NoArgsConstructor
+
 @Getter
 @Setter
 @Table(name = "usuarios")
@@ -37,6 +37,8 @@ public class Usuario implements UserDetails {
         this.ativo = true;
     }
 
+    public Usuario() {
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -79,5 +81,13 @@ public class Usuario implements UserDetails {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getSenha() {
+        return senha;
     }
 }

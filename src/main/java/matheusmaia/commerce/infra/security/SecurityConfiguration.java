@@ -36,7 +36,7 @@ public class SecurityConfiguration {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> req
                         .requestMatchers(HttpMethod.POST,"/user/cadastrarUsuario").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
+                        .requestMatchers("/user/login").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

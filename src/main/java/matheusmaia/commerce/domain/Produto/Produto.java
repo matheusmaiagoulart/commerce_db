@@ -45,6 +45,51 @@ public class Produto {
         this.ativo = true;
     }
 
+    public UUID getId() {
+        return id;
+    }
 
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
 
+    public LocalDate getValidade() {
+        return validade;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public Estoque getEstoque() {
+        return estoque;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+
+    public void setValidade(LocalDate validade) {
+        this.validade = validade;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public void setEstoque(Estoque estoque) {
+        this.estoque = estoque;
+    }
 }

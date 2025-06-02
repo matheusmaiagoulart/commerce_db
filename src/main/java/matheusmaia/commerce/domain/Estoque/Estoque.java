@@ -51,4 +51,56 @@ public class Estoque {
         this.ativo = true;
 
     }
+
+    public UUID getIdProduto() {
+        return idProduto;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public LocalDate getValidade() {
+        return validade;
+    }
+
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
+
+    public void setIdProduto(UUID idProduto) {
+        this.idProduto = idProduto;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+
+    public void setValidade(LocalDate validade) {
+        this.validade = validade;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
 }
