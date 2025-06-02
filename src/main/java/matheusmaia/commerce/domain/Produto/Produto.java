@@ -45,6 +45,10 @@ public class Produto {
         this.ativo = true;
     }
 
+    public Produto(){
+
+    }
+
     public UUID getId() {
         return id;
     }

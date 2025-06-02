@@ -11,9 +11,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
-@NoArgsConstructor
-@Getter
-@Setter
+
 @Table(name = "estoque")
 @Entity(name = "Estoque")
 public class Estoque {
@@ -51,6 +49,7 @@ public class Estoque {
         this.ativo = true;
 
     }
+    public Estoque(){}
 
     public UUID getIdProduto() {
         return idProduto;

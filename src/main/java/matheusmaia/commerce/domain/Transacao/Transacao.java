@@ -41,6 +41,9 @@ public class Transacao {
         this.valor = dados.valor();
         this.dataHora = dados.dataHora();
     }
+    public Transacao(){
+
+    }
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
